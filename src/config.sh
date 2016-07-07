@@ -16,3 +16,5 @@ LOOP_BOOT="/dev/loop1"
 LOOP_ROOT="/dev/loop2"
 
 ROOT_UUID=$(uuidgen)
+
+INCLUDE_PKG="ifupdown,openssh-server"

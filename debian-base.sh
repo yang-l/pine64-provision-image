@@ -23,8 +23,21 @@ sudo losetup "${LOOP_ROOT}" "${OUTPUT_DIR}/${BASE_IMAGE}" -o $((143360 * 512)) -
 # mount
 sudo mount -U "${ROOT_UUID}" "${ROOT_DIR}"
 
+# debootstrap (local)
+LATEST_DEBOOTSTRAP=$(curl -sSL http://ftp.us.debian.org/debian/pool/main/d/debootstrap | grep 'all.deb' | awk -F 'href' '{print $2}' | cut -d '"' -f2 | tail -n1)
+curl -sSL "http://ftp.us.debian.org/debian/pool/main/d/debootstrap/${LATEST_DEBOOTSTRAP}" > "${OUTPUT_DIR}/${LATEST_DEBOOTSTRAP}"
+cd "${OUTPUT_DIR}"
+ar xv "${LATEST_DEBOOTSTRAP}"
+tar -xf data.tar.gz
+cd -
+
 # debootstap / first-stage
-sudo debootstrap --foreign --arch=arm64 --variant=minbase --include=ifupdown,openssh-server --keyring=./src/bin/debian-archive-keyring.gpg jessie "${ROOT_DIR}" http://httpredir.debian.org/debian/
+if [ "$(command -v gpgv)" ]
+then
+    sudo DEBOOTSTRAP_DIR="${OUTPUT_DIR}"/usr/share/debootstrap "${OUTPUT_DIR}"/usr/sbin/debootstrap --foreign --arch=arm64 --variant=minbase --include="${INCLUDE_PKG}" --keyring=./src/bin/debian-archive-keyring.gpg jessie "${ROOT_DIR}" http://httpredir.debian.org/debian/
+else
+    sudo DEBOOTSTRAP_DIR="${OUTPUT_DIR}"/usr/share/debootstrap "${OUTPUT_DIR}"/usr/sbin/debootstrap --foreign --arch=arm64 --variant=minbase --include="${INCLUDE_PKG}" jessie "${ROOT_DIR}" http://httpredir.debian.org/debian/
+fi
 
 # git-clone scripts from longsleep
 sudo git clone https://github.com/longsleep/build-pine64-image.git "${LONGSLEEP_DIR}"
