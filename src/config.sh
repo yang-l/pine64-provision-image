@@ -17,4 +17,4 @@ LOOP_ROOT="/dev/loop2"
 
 ROOT_UUID=$(uuidgen)
 
-INCLUDE_PKG="ifupdown,openssh-server"
+INCLUDE_PKG="curl,ifupdown,openssh-server"

@@ -28,7 +28,8 @@ do_chroot /debootstrap/debootstrap --second-stage
 # chroot / create scripts
 # copy platform scripts from longsleep
 yes | sudo cp -av "${LONGSLEEP_DIR}"/simpleimage/platform-scripts/. "${ROOT_DIR}/usr/local/sbin"
-sudo chmod 755 "${ROOT_DIR}/usr/local/sbin"/*
+sudo chown root:root "${ROOT_DIR}"/usr/local/sbin/.
+sudo chmod 755 "${ROOT_DIR}"/usr/local/sbin/.
 
 # create systemd unit files
 sudo dd of="${ROOT_DIR}/etc/systemd/system/eth0-mackeeper.service" << EOF
