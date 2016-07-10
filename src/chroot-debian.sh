@@ -184,6 +184,9 @@ systemctl enable eth0-mackeeper
 systemctl enable cpu-corekeeper
 systemctl enable ssh-keygen
 
+# /etc/mtab symbol link
+ln -snf /proc/self/mounts /etc/mtab
+
 # clean up
 apt-get --purge autoremove
 apt-get clean
