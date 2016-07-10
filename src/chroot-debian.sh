@@ -85,6 +85,13 @@ do_chroot << "EOF"
 #### INSIDE CHROOT ####
 
 ## Common functions
+set_locale () {
+    echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
+    locale-gen
+    debconf-set-selections <<< "locales locales/default_environment_locale select en_US.UTF-8"
+    dpkg-reconfigure -f noninteractive locales
+}
+
 debian_apt_list () {
     echo "deb http://ftp.debian.org/debian/ ${1} main contrib non-free" > /etc/apt/sources.list
     echo "deb http://ftp.debian.org/debian/ ${1}-updates main contrib non-free" >> /etc/apt/sources.list
@@ -152,8 +159,7 @@ EOF_WLAN1
 ##
 
 ## Main
-
-locale-gen en_US.UTF-8
+set_locale
 
 debian_apt_list "jessie"
 set_hostname "pine64"

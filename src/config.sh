@@ -17,5 +17,5 @@ LOOP_ROOT="/dev/loop2"
 
 ROOT_UUID=$(uuidgen)
 
-INCLUDE_PKG="curl,ifupdown,lsof,openssh-server,sudo"
+INCLUDE_PKG="curl,ifupdown,locales,lsof,openssh-server,sudo"
 EXCLUDE_PKG="vim-tiny,wget"
