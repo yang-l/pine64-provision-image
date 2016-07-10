@@ -3,6 +3,8 @@
 
 This code is based / modified / taken from [[https://github.com/umiddelb/z2d][umiddelb/z2d]] and [[https://github.com/longsleep/build-pine64-image][longsleep/build-pine64-image]] to create base images for Pine64.
 
-The code is developed and tested under Centos7 / Debian8. There should no need to install any extra software.
+The code here is only for fun, and may be used later for my own projects. This project is made from quick and dirty hacks.
+
+The code is developed and tested under Gentoo / Centos7 / Debian8 (X86 64bit architecture). There should no need to install any extra software.
 
 Currently, it only generates a headless Debian 8 image with only ssh-server installed on it.
