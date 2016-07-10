@@ -202,5 +202,5 @@ sudo rm -f "${ROOT_DIR}/usr/sbin/policy-rc.d"
 sudo dd of="${ROOT_DIR}/etc/fstab" << EOF
 # <file system>	<dir>	<type>	<options>			<dump>	<pass>
 /dev/mmcblk0p1	/boot	vfat	defaults			0	2
-/dev/mmcblk0p2	/	ext4	defaults,noatime		0	1
+/dev/mmcblk0p2	/	ext4	defaults,data=writeback,noatime,nodiratime		0	1
 EOF

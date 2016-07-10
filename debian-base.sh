@@ -19,6 +19,7 @@ sudo losetup "${LOOP_ROOT}" "${OUTPUT_DIR}/${BASE_IMAGE}" -o $((143360 * 512)) -
 
 # create filesystem
 /bin/echo -e "y\n" | sudo mkfs.ext4 -O ^has_journal -b 4096 -L rootfs -U "${ROOT_UUID}" "${LOOP_ROOT}"
+sudo tune2fs -o journal_data_writeback "${LOOP_ROOT}"
 
 # mount
 sudo mount -U "${ROOT_UUID}" "${ROOT_DIR}"
