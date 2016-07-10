@@ -153,6 +153,8 @@ EOF_WLAN1
 
 ## Main
 
+locale-gen en_US.UTF-8
+
 debian_apt_list "jessie"
 set_hostname "pine64"
 set_nameserver "8.8.8.8" "8.8.4.4"
