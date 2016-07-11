@@ -190,6 +190,7 @@ ln -snf /proc/self/mounts /etc/mtab
 # clean up
 apt-get --purge autoremove
 apt-get clean
+rm -f /etc/ssh/ssh_host_*
 rm /sbin/initctl; dpkg-divert --local --rename --remove /sbin/initctl
 
 #### END OF INSIDE CHROOT ####
