@@ -7,11 +7,13 @@ The code here is only for fun, and may be used later by my personal projects. An
 
 The code is developed and tested under Gentoo / Centos7 / Debian8 (x86 64bit). No extra software should be required here.
 
-There will be no HDMI / Audio / DE build-in (as need of them and can reduce image size), but any required packages can be installed later manually.
+There will be no HDMI / serial console / Audio / DE build-in (as need of them and can reduce image size), but any required packages can be installed later manually.
 
 Currently, it only generates a headless Debian 8 image with only ssh-server installed on it.
 
 Usage -
+
+Require root or sudo to run
 
 #+BEGIN_SRC bash
 bash debian-base.sh
