@@ -17,7 +17,9 @@ sudo cp ./src/bin/qemu-aarch64-static "${ROOT_DIR}/usr/bin"
 do_chroot() {
     sudo LC_ALL=C LANGUAGE=C LANG=C chroot "${ROOT_DIR}" qemu-aarch64-static /bin/mount -t proc proc /proc
     sudo LC_ALL=C LANGUAGE=C LANG=C chroot "${ROOT_DIR}" qemu-aarch64-static /bin/mount -t sysfs sys /sys
+    sudo LC_ALL=C LANGUAGE=C LANG=C chroot "${ROOT_DIR}" qemu-aarch64-static /bin/mount -t devpts devpts /dev/pts
     sudo LC_ALL=C LANGUAGE=C LANG=C chroot "${ROOT_DIR}" qemu-aarch64-static /bin/bash "$@"
+    sudo LC_ALL=C LANGUAGE=C LANG=C chroot "${ROOT_DIR}" qemu-aarch64-static /bin/umount /dev/pts
     sudo LC_ALL=C LANGUAGE=C LANG=C chroot "${ROOT_DIR}" qemu-aarch64-static /bin/umount /sys
     sudo LC_ALL=C LANGUAGE=C LANG=C chroot "${ROOT_DIR}" qemu-aarch64-static /bin/umount /proc
 }
