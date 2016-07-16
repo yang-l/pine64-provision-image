@@ -10,7 +10,7 @@ BOOT_DIR="${ROOT_DIR}/boot"
 KERNEL_DIR="${OUTPUT_DIR}/kernel"
 LONGSLEEP_DIR="${OUTPUT_DIR}/longsleep"
 
-ROOT_PART_SIZE="1024"
+ROOT_PART_SIZE="1536"
 
 LOOP_BOOT="/dev/loop1"
 LOOP_ROOT="/dev/loop2"
