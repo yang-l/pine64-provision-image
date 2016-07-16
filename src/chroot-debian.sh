@@ -189,6 +189,9 @@ systemctl enable ssh-keygen
 # /etc/mtab symbol link
 ln -snf /proc/self/mounts /etc/mtab
 
+# pine64 gb ethernet workaround
+sed -i 's/^exit 0$/ethtool -s eth0 speed 100 duplex full\nexit 0/' /etc/rc.local
+
 # clean up
 apt-get --purge autoremove
 apt-get clean
