@@ -3,11 +3,11 @@
 
 Some of this code is based / modified / taken from [[https://github.com/umiddelb/z2d][umiddelb/z2d]] and [[https://github.com/longsleep/build-pine64-image][longsleep/build-pine64-image]] to create base images for Pine64.
 
-The code here is only for fun, and may be used later by my personal projects. And it is made by some quick and dirty hacks.
+The code here is only for fun, and may be used for my later projects. This is made by quick and dirty hacks.
 
 The code is developed and tested under Gentoo / Centos7 / Debian8 (x86 64bit). No extra software should be required here.
 
-There will be no HDMI / serial console / Audio / DE build-in (as need of them and can reduce image size), but any required packages can be installed later manually.
+There is no HDMI & serial console & audio output / DE build-in (as no need any of them and willing to reduce image size), but any required packages can be installed later via package manager or manually.
 
 Currently, it only generates a headless Debian 8 image with only ssh-server installed on it.
 
