@@ -18,4 +18,4 @@ LOOP_ROOT="/dev/loop2"
 ROOT_UUID=$(uuidgen)
 
 INCLUDE_PKG="curl,ethtool,ifupdown,locales,lsof,openssh-server,sudo"
-EXCLUDE_PKG="vim-common,vim-tiny,wget"
+EXCLUDE_PKG="apt-transport-https,tasksel,tasksel-data,vim-common,vim-tiny,wget"
