@@ -84,6 +84,72 @@ KERNEL=="cedar_dev", MODE="0770", GROUP="video"
 KERNEL=="ion", MODE="0770", GROUP="video"
 EOF
 
+sudo dd of="${ROOT_DIR}/etc/locale.nopurge.template" << EOF
+####################################################
+# This is the configuration file for localepurge(8).
+####################################################
+
+####################################################
+# Uncommenting this string enables the use of dpkg's
+# --path-exclude feature.  In this mode, localepurge
+# will configure dpkg to exclude the desired locales
+# at unpack time.
+#
+# If enabled, the following 3 options will be
+# disabled:
+#
+#  QUICKNDIRTYCALC
+#  SHOWFREEDSPACE
+#  VERBOSE
+#
+# And the following option will be enabled and cannot
+# be disabled (unless USE_DPKG is disabled):
+#
+#  DONTBOTHERNEWLOCALE
+#
+
+#USE_DPKG
+####################################################
+
+####################################################
+# Uncommenting this string enables removal of localized
+# man pages based on the configuration information for
+# locale files defined below:
+
+MANDELETE
+
+####################################################
+# Uncommenting this string causes localepurge to simply delete
+# locales which have newly appeared on the system without
+# bothering you about it:
+
+DONTBOTHERNEWLOCALE
+
+####################################################
+# Uncommenting this string enables display of freed disk
+# space if localepurge has purged any superfluous data:
+
+SHOWFREEDSPACE
+
+#####################################################
+# Commenting out this string enables faster but less
+# accurate calculation of freed disk space:
+
+#QUICKNDIRTYCALC
+
+#####################################################
+# Commenting out this string disables verbose output:
+
+#VERBOSE
+
+#####################################################
+# Following locales won't be deleted from this system
+# after package installations done with apt-get(8):
+
+en
+en_US.UTF-8
+EOF
+
 # chroot
 do_chroot << "EOF"
 #### INSIDE CHROOT ####
@@ -177,6 +243,10 @@ export DEBIAN_FRONTEND=noninteractive
 
 # Update
 apt-get update
+
+# localepurge
+mv /etc/locale.nopurge.template /etc/locale.nopurge
+localepurge
 
 # network
 set_if_lo
