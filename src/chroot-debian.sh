@@ -30,6 +30,12 @@ do_chroot() {
 do_chroot /debootstrap/debootstrap --second-stage
 
 # chroot / create scripts
+# copy docker installation script
+if [ "${INSTALL_DOCKER}" = true ]
+then
+    yes | sudo cp -av "${SRC_DIR}"/docker-debian.sh "${ROOT_DIR}/usr/local/sbin"
+fi
+
 # copy platform scripts from longsleep
 yes | sudo cp -av "${LONGSLEEP_DIR}"/simpleimage/platform-scripts/. "${ROOT_DIR}/usr/local/sbin"
 sudo chown root:root "${ROOT_DIR}"/usr/local/sbin/.
@@ -229,24 +235,35 @@ EOF_WLAN1
 ##
 
 ## Main
-set_locale
-
 debian_apt_list "jessie"
 set_hostname "pine64"
 set_nameserver "8.8.8.8" "8.8.4.4"
-
 add_user "debian"
 
-# Debian chroot - https://wiki.debian.org/chroot
+# Do not (re)start service in chroot
 dpkg-divert --local --rename --add /sbin/initctl; ln -s /bin/true /sbin/initctl
+dpkg-divert --local --rename --add /sbin/start-stop-daemon; ln -s /bin/true /sbin/start-stop-daemon
+dpkg-divert --local --rename --add /usr/sbin/service; ln -s /bin/true /usr/sbin/service
+
 export DEBIAN_FRONTEND=noninteractive
 
 # Update
 apt-get update
 
-# localepurge
+# Install packages
+RUNLEVEL=1 apt-get -y --no-install-recommends install curl ethtool ifupdown localepurge locales lsof lvm2 ntp openssh-server sudo
+
+# locale / localepurge
+set_locale
 mv /etc/locale.nopurge.template /etc/locale.nopurge
 localepurge
+
+# Docker
+if [ -e "/usr/local/sbin/docker-debian.sh" ]
+then
+    bash -x /usr/local/sbin/docker-debian.sh
+    rm -f /usr/local/sbin/docker-debian.sh
+fi
 
 # network
 set_if_lo
@@ -269,6 +286,8 @@ apt-get --purge autoremove
 apt-get clean
 rm -f /etc/ssh/ssh_host_*
 rm /sbin/initctl; dpkg-divert --local --rename --remove /sbin/initctl
+rm /sbin/start-stop-daemon; dpkg-divert --local --rename --remove /sbin/start-stop-daemon
+rm /usr/sbin/service; dpkg-divert --local --rename --remove /usr/sbin/service
 
 #### END OF INSIDE CHROOT ####
 EOF

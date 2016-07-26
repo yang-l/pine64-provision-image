@@ -4,6 +4,7 @@ BASE_IMAGE="pine64.img"
 KERNEL_URL="https://www.stdin.xyz/downloads/people/longsleep/pine64-images/linux/linux-pine64-latest.tar.xz"
 KERNEL_FILE="kernel.tar.xz"
 
+SRC_DIR="./src"
 OUTPUT_DIR="./output"
 ROOT_DIR="${OUTPUT_DIR}/root"
 BOOT_DIR="${ROOT_DIR}/boot"
@@ -17,5 +18,6 @@ LOOP_ROOT="/dev/loop2"
 
 ROOT_UUID=$(uuidgen)
 
-INCLUDE_PKG="curl,ethtool,ifupdown,localepurge,locales,lsof,ntp,openssh-server,sudo"
 EXCLUDE_PKG="apt-transport-https,cron,debconf-i18n,logrotate,tasksel,tasksel-data,vim-common,vim-tiny,wget"
+
+INSTALL_DOCKER=true
