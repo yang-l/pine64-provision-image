@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 source ./src/config.sh
+set -x
 
 # create folders
 [ ! -d "${OUTPUT_DIR}" ] && mkdir "${OUTPUT_DIR}"
