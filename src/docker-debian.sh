@@ -1,4 +1,4 @@
-RUNLEVEL=1 apt-get -y -t jessie-backports --no-install-recommends install libseccomp2 aufs-tools xz-utils cgroupfs-mount git
+RUNLEVEL=1 apt-get -y -t jessie-backports --no-install-recommends install libseccomp2 aufs-tools xz-utils cgroupfs-mount git ca-certificates
 
 DOCKER_VER="v1.12.0-rc4"
 
