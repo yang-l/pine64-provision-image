@@ -20,4 +20,11 @@ ROOT_UUID=$(uuidgen)
 
 EXCLUDE_PKG="apt-transport-https,cron,debconf-i18n,logrotate,tasksel,tasksel-data,vim-common,vim-tiny,wget"
 
+# Provision option for Docker
 INSTALL_DOCKER=true
+
+# LVM configs
+VG_NAME="pine64"
+LV_DOCKER_NAME="docker"
+LV_DOCKER_SIZE="5G"
+LV_DOCKER_FS_UUID=$(uuidgen)
