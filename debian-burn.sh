@@ -28,12 +28,12 @@ then
     LVM_FS="/dev/mapper/${VG_NAME}-${LV_DOCKER_NAME}"
     # LVM
     /bin/echo -e "n\np\n3\n$((143360 + ROOT_PART_SIZE * 1024 * 1024 / 512))\n\nt\n3\n8e\nw\n" | sudo fdisk "${DEVICE}"
-    sudo pvcreate "${DEVICE}3"
-    sudo vgcreate "${VG_NAME}" "${DEVICE}3"
-    /bin/echo -e "y\n" | sudo lvcreate -L "${LV_DOCKER_SIZE}" -n "${LV_DOCKER_NAME}" "${VG_NAME}"
+    sudo pvcreate "${DEVICE}3" || exit 1
+    sudo vgcreate "${VG_NAME}" "${DEVICE}3" || exit 1
+    /bin/echo -e "y\n" | sudo lvcreate -L "${LV_DOCKER_SIZE}" -n "${LV_DOCKER_NAME}" "${VG_NAME}" || exit 1
     # FS
-    /bin/echo -e "y\n" | sudo mkfs.ext4 -O ^has_journal -b 4096 -L rootfs -U "${LV_DOCKER_FS_UUID}" "${LVM_FS}"
-    sudo tune2fs -o journal_data_writeback "${LVM_FS}"
+    /bin/echo -e "y\n" | sudo mkfs.ext4 -O ^has_journal -b 4096 -L rootfs -U "${LV_DOCKER_FS_UUID}" "${LVM_FS}" || exit 1
+    sudo tune2fs -o journal_data_writeback "${LVM_FS}" || exit 1
 fi
 
 # mount the media
