@@ -52,6 +52,7 @@ sudo mount "${LOOP_BOOT}" "${BOOT_DIR}"
 [ ! -d "${KERNEL_DIR}" ] && mkdir "${KERNEL_DIR}"
 curl -sSL "${KERNEL_URL}" --output "${OUTPUT_DIR}/${KERNEL_FILE}"
 sudo tar -C "${KERNEL_DIR}" --numeric-owner -xJf "${OUTPUT_DIR}/${KERNEL_FILE}"
+sudo rm -f "${ROOT_DIR}"/boot/pine64/*
 sudo cp -RLp "${KERNEL_DIR}"/boot/. "${ROOT_DIR}"/boot/
 sudo cp -RLp "${KERNEL_DIR}"/lib/. "${ROOT_DIR}"/lib/ 2> /dev/null || true
 sudo cp -RLp "${KERNEL_DIR}"/usr/. "${ROOT_DIR}"/usr/
