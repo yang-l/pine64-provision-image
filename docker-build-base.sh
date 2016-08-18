@@ -1,7 +1,7 @@
 docker run -i --rm \
        --privileged \
        -v $(pwd):/srv/source \
-       travis-ci /bin/bash -s <<EOF
+       docker-builder /bin/bash -s <<EOF
 
 set -x
 
