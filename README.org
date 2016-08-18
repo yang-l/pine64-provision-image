@@ -1,6 +1,8 @@
 #+TITLE: Provision Pine64 Image
 #+OPTIONS: toc:2 num:nil
 
+[[https://travis-ci.org/yang-l/pine64-provision-image][file:https://travis-ci.org/yang-l/pine64-provision-image.svg?branch=master]]
+
 Some of this code is based / modified / taken from [[https://github.com/umiddelb/z2d][umiddelb/z2d]] and [[https://github.com/longsleep/build-pine64-image][longsleep/build-pine64-image]] to create base images for Pine64.
 
 The code here is only for fun, and may be used for my later projects. This is made by quick and dirty hacks.

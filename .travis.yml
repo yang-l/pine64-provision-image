@@ -10,7 +10,7 @@ branches:
   - master
 
 before_install:
-  - curl -sL https://github.com/yang-l/docker-in-travis-ci/blob/master/Dockerfile -o Dockerfile
+  - curl -sL https://github.com/yang-l/docker-in-travis-ci/raw/master/Dockerfile -o Dockerfile
 
 install:
   - docker build -t docker-builder .
