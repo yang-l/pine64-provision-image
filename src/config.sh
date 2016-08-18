@@ -13,8 +13,8 @@ LONGSLEEP_DIR="${OUTPUT_DIR}/longsleep"
 
 ROOT_PART_SIZE="1536"
 
-LOOP_BOOT="/dev/loop1"
-LOOP_ROOT="/dev/loop2"
+LOOP_BOOT="/dev/loop5"
+LOOP_ROOT="/dev/loop6"
 
 ROOT_UUID=$(uuidgen)
 
