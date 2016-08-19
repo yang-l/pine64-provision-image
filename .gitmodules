@@ -1,0 +1,3 @@
+[submodule "dockerfiles"]
+	path = dockerfiles
+	url = git@github.com:yang-l/docker-in-travis-ci.git

@@ -9,11 +9,17 @@ branches:
   only:
   - master
 
+## submodule
+git:
+  submodules: false
+
 before_install:
-  - curl -sL https://github.com/yang-l/docker-in-travis-ci/raw/master/Dockerfile -o Dockerfile
+  - sed -i 's/git@github.com:/https:\/\/github.com\//' .gitmodules
+  - git submodule update --init --recursive
+##
 
 install:
-  - docker build -t docker-builder .
+  - docker build -t x86_64 - < dockerfiles/Dockerfile.dev.x86_64.ubuntu.xenial
 
 script:
-  - bash docker-build-base.sh
+  - bash docker-build-base.sh x86_64

@@ -1,7 +1,7 @@
 docker run -i --rm \
        --privileged \
        -v $(pwd):/srv/source \
-       docker-builder /bin/bash -s <<EOF
+       $1 /bin/bash -s <<EOF
 
 set -x
 
