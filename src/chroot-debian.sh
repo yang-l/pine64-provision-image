@@ -280,8 +280,20 @@ systemctl enable ssh-keygen
 # /etc/mtab symbol link
 ln -snf /proc/self/mounts /etc/mtab
 
+# set right permission
+chmod 755 /usr/bin/qemu-x86_64-static
+
+## rc.local / manual modifications
+sed -i 's/^exit 0$//' /etc/rc.local
+
 # pine64 gb ethernet workaround
-sed -i 's/^exit 0$/ethtool -s eth0 speed 100 duplex full\nexit 0/' /etc/rc.local
+echo 'ethtool -s eth0 speed 100 duplex full' >> /etc/rc.local
+
+# add qemu-x86_64 to run x86_64 program
+echo "echo ':x86_64:M::\x7fELF\x02\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x3e\x00:\xff\xff\xff\xff\xff\xfe\xfe\xfc\xff\xff\xff\xff\xff\xff\xff\xff\xfe\xff\xff\xff:/usr/bin/qemu-x86_64-static:' > /proc/sys/fs/binfmt_misc/register" >> /etc/rc.local
+
+echo 'exit 0' >> /etc/rc.local
+##
 
 # clean up
 apt-get --purge autoremove
