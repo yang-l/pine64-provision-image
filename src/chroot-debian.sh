@@ -11,8 +11,8 @@ EOF
 sudo chmod a+x "${ROOT_DIR}/usr/sbin/policy-rc.d"
 
 # copy static qemu emulation
-sudo cp ./src/bin/qemu-aarch64-static "${ROOT_DIR}/usr/bin"
-sudo cp ./src/bin/qemu-x86_64-static "${ROOT_DIR}/usr/bin"
+sudo cp ./qemu-bin/qemu-aarch64-static "${ROOT_DIR}/usr/bin" || exit 1
+sudo cp ./qemu-bin/qemu-x86_64-static "${ROOT_DIR}/usr/bin" || exit 1
 [ "$(uname -m)" == "x86_64" ] && [ -f /proc/sys/fs/binfmt_misc/aarch64 ] || { echo ':aarch64:M::\x7fELF\x02\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\xb7:\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xfe\xff\xff:/usr/bin/qemu-aarch64-static:' | sudo tee /proc/sys/fs/binfmt_misc/register || exit 1 ; }
 
 # chroot / mount

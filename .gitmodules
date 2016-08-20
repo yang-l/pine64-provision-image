@@ -1,3 +1,6 @@
 [submodule "dockerfiles"]
 	path = dockerfiles
 	url = git@github.com:yang-l/docker-in-travis-ci.git
+[submodule "qemu-bin"]
+	path = qemu-bin
+	url = git@github.com:yang-l/qemu-emu-bin.git

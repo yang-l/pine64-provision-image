@@ -37,7 +37,7 @@ cd -
 # debootstap / first-stage
 if [ "$(command -v gpgv)" ]
 then
-    sudo DEBOOTSTRAP_DIR="${OUTPUT_DIR}"/usr/share/debootstrap "${OUTPUT_DIR}"/usr/sbin/debootstrap --foreign --arch=arm64 --exclude="${EXCLUDE_PKG}" --keyring=./src/bin/debian-archive-keyring.gpg jessie "${ROOT_DIR}" || exit 1
+    sudo DEBOOTSTRAP_DIR="${OUTPUT_DIR}"/usr/share/debootstrap "${OUTPUT_DIR}"/usr/sbin/debootstrap --foreign --arch=arm64 --exclude="${EXCLUDE_PKG}" --keyring=./src/debian-archive-keyring.gpg jessie "${ROOT_DIR}" || exit 1
 else
     sudo DEBOOTSTRAP_DIR="${OUTPUT_DIR}"/usr/share/debootstrap "${OUTPUT_DIR}"/usr/sbin/debootstrap --foreign --arch=arm64 --exclude="${EXCLUDE_PKG}" jessie "${ROOT_DIR}" || exit 1
 fi
