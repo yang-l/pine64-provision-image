@@ -23,7 +23,7 @@ before_install:
 ##
 
 install:
-  - docker build -t x86_64 - < dockerfiles/Dockerfile.dev.x86_64.ubuntu.xenial
+  - docker build -t x86_64 -f dockerfiles/Dockerfile.dev.x86_64.ubuntu.xenial .
 
 script:
   - bash docker-build-base.sh x86_64
