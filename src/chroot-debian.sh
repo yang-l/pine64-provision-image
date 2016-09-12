@@ -15,6 +15,9 @@ sudo cp ./qemu-bin/qemu-aarch64-static "${ROOT_DIR}/usr/bin" || exit 1
 sudo cp ./qemu-bin/qemu-x86_64-static "${ROOT_DIR}/usr/bin" || exit 1
 [ "$(uname -m)" == "x86_64" ] && [ -f /proc/sys/fs/binfmt_misc/aarch64 ] || { echo ':aarch64:M::\x7fELF\x02\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\xb7:\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xfe\xff\xff:/usr/bin/qemu-aarch64-static:' | sudo tee /proc/sys/fs/binfmt_misc/register || exit 1 ; }
 
+# copy ssh pubkey
+[ -s "${CONF_DIR}/id_rsa_debian.pub" ] && { sudo cp "${CONF_DIR}/id_rsa_debian.pub" "${ROOT_DIR}" || exit 1 ; }
+
 # chroot / mount
 do_chroot() {
     sudo LC_ALL=C LANGUAGE=C LANG=C chroot "${ROOT_DIR}" qemu-aarch64-static /bin/mount -t proc proc /proc
@@ -267,8 +270,18 @@ then
     rm -f /usr/local/sbin/docker-debian.sh
 fi
 
-# password-less sudo
-echo "debian    ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/pwdless_debian
+if [ -s "/id_rsa_debian.pub" ]
+then
+    # password-less sudo
+    echo "debian    ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/pwdless_debian
+
+    # copy ssh key
+    mkdir -p /home/debian/.ssh
+    chown debian.debian /home/debian/.ssh
+    cat /id_rsa_debian.pub >> /home/debian/.ssh/authorized_keys
+    chmod 600 /home/debian/.ssh/authorized_keys
+    rm /id_rsa_debian.pub
+fi
 
 # network
 set_if_lo
