@@ -267,6 +267,9 @@ then
     rm -f /usr/local/sbin/docker-debian.sh
 fi
 
+# password-less sudo
+echo "debian    ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/pwdless_debian
+
 # network
 set_if_lo
 set_if_dhcp "eth0"
