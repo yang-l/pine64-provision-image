@@ -1,6 +1,6 @@
 RUNLEVEL=1 apt-get -y -t jessie-backports --no-install-recommends install libseccomp2 aufs-tools xz-utils cgroupfs-mount git ca-certificates
 
-DOCKER_VER="v1.12.0"
+DOCKER_VER="v1.12.1"
 
 # use prebuild docker for aarch64
 curl -sLk https://github.com/yang-l/pine64-docker/raw/"${DOCKER_VER}"/docker.tar.xz | tar -C /usr/bin/ -xJpf -
