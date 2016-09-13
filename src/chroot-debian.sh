@@ -247,11 +247,16 @@ set_ssh_key_authen() {
 
     # copy ssh key
     mkdir -p /home/"${1}"/.ssh
-    chown "${1}:${1}" /home/"${1}"/.ssh
-    chmod 700 /home/"${1}"/.ssh
     cat "${2}" >> /home/"${1}"/.ssh/authorized_keys
-    chmod 600 /home/"${1}"/.ssh/authorized_keys
+    chmod -R 600 /home/"${1}"/.ssh
+    chown -R "${1}:${1}" /home/"${1}"/.ssh
     rm "${2}"
+
+    # disalbe password authentication on sshd
+    cp /etc/ssh/sshd_config /etc/ssh/sshd_config.orgi
+    sed -i "s/^PermitRootLogin .*$/PermitRootLogin no/" /etc/ssh/sshd_config
+    sed -i "s/^#PasswordAuthentication .*$/PasswordAuthentication no/" /etc/ssh/sshd_config
+    sed -i "s/^UsePAM .*$/UsePAM no/" /etc/ssh/sshd_config
 }
 ##
 
