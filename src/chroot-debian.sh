@@ -247,8 +247,9 @@ set_ssh_key_authen() {
 
     # copy ssh key
     mkdir -p /home/"${1}"/.ssh
+    chmod 700 /home/"${1}"/.ssh
     cat "${2}" >> /home/"${1}"/.ssh/authorized_keys
-    chmod -R 600 /home/"${1}"/.ssh
+    find /home/"${1}"/.ssh -type f -exec chmod 600 {} +
     chown -R "${1}:${1}" /home/"${1}"/.ssh
     rm "${2}"
 
