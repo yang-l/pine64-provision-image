@@ -1,7 +1,7 @@
 BASE_IMAGE_URL="https://www.stdin.xyz/downloads/people/longsleep/pine64-images/simpleimage-pine64-latest.img.xz"
 BASE_IMAGE="pine64.img"
 
-KERNEL_URL="https://github.com/yang-l/pine64-kernel/blob/c723c5ae4efc0a4cd0f043eb8be893fe399292c9/kernel.tar.xz?raw=true"
+KERNEL_URL="https://github.com/yang-l/pine64-kernel/blob/1ac0eeab37f7ead8b5951303d39947b1deda4550/kernel.tar.xz?raw=true"
 KERNEL_FILE="kernel.tar.xz"
 
 SRC_DIR="$(cd -P "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
