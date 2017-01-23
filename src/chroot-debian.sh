@@ -174,17 +174,17 @@ set_locale () {
 }
 
 debian_apt_list () {
-    echo "deb http://ftp.debian.org/debian/ ${1} main contrib non-free" > /etc/apt/sources.list
-    echo "deb http://ftp.debian.org/debian/ ${1}-updates main contrib non-free" >> /etc/apt/sources.list
-    echo "deb http://ftp.debian.org/debian/ ${1}-backports main contrib non-free" >> /etc/apt/sources.list
+    echo "deb http://httpredir.debian.org/debian/ ${1} main contrib non-free" > /etc/apt/sources.list
+    echo "deb http://httpredir.debian.org/debian/ ${1}-updates main contrib non-free" >> /etc/apt/sources.list
+    echo "deb http://httpredir.debian.org/debian/ ${1}-backports main contrib non-free" >> /etc/apt/sources.list
     echo "deb http://security.debian.org/ ${1}/updates main contrib non-free" >> /etc/apt/sources.list
 
     echo "APT::Default-Release \"${1}\";" > /etc/apt/apt.conf.d/99defaultrelease
 
-    echo "deb http://ftp.debian.org/debian/ stable main contrib non-free" > /etc/apt/sources.list.d/stable.list
+    echo "deb http://httpredir.debian.org/debian/ stable main contrib non-free" > /etc/apt/sources.list.d/stable.list
     echo "deb http://security.debian.org/ stable/updates main contrib non-free" >> /etc/apt/sources.list.d/stable.list
 
-    echo "deb http://ftp.debian.org/debian/ testing main contrib non-free" > /etc/apt/sources.list.d/testing.list
+    echo "deb http://httpredir.debian.org/debian/ testing main contrib non-free" > /etc/apt/sources.list.d/testing.list
     echo "deb http://security.debian.org/ testing/updates main contrib non-free" >> /etc/apt/sources.list.d/testing.list
 }
 
